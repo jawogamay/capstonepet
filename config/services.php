@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'nexmo' => [
+    'key' => 'NEXMO_KEY',
+    'secret' =>'NEXMO_SECRET'   ,
+    'sms_from' => 'Pet Centre Animal Clinic',
+    ],
 ];

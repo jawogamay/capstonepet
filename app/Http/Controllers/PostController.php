@@ -29,6 +29,10 @@ class PostController extends Controller
         }
     }
 
+    public function getPosts(){
+        
+        return Post::latest()->with('user')->paginate();
+    }
     /**
      * Show the form for creating a new resource.
      *

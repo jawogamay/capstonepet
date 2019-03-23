@@ -118,6 +118,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </p>
                 </router-link>
          </li>
+
+             <li class="nav-item">
+                <router-link to="/appointments" class="nav-link">
+                    <i class="nav-icon fas fa-cogs"></i>
+                    <p>
+                       Appointment
+                    </p>
+                </router-link>
+         </li>
+          <li class="nav-item">
+             <router-link to="/qrcode" class="nav-link">
+                    <i class="nav-icon fas fa-cogs"></i>
+                    <p>
+                        QR CODE
+                    </p>
+                </router-link>
+         </li>
          @endcan
           @can('isUser')
            <li class="nav-item">
@@ -146,7 +163,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </p>
                 </router-link>
          </li>
+         <li class="nav-item">
+            <router-link to="/maps" class="nav-link">
+                <i class="nav-icon fas fa-home  "></i>
+                <p>
+                Map
 
+                </p>
+            </router-link>
+            </li>
          @endcan
           <li class="nav-item">
                 <router-link to="/profile" class="nav-link">
@@ -201,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 <a href="https://adminlte.io">Pet Centre Animal Clinic</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

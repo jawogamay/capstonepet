@@ -15,12 +15,13 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('middlename');
-            $table->string('purpose');
-            $table->string('petType');
             $table->string('petname');
+            $table->string('petbreed');
+            $table->string('petgender');
+            $table->integer('petage');
+            $table->unsignedInteger('user_id');
+            $table->string('status')->default('Not');
+            $table->string('service');
             $table->timestamps();
         });
     }

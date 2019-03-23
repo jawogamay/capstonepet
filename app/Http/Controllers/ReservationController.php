@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Notifications\TransactionCreatedSMS;
 use App\Reservation;
+use Notification;
 use Illuminate\Http\Request;
+use Nexmo;
 use Auth;
+use App\User;
 use App\Pet;
 
 class ReservationController extends Controller
@@ -20,7 +23,14 @@ class ReservationController extends Controller
     }
     public function index()
     {
-        //
+        if(!\Gate::allows('isAdmin') || !\Gate::allows('isAuthor')){
+            if(Auth::check())
+            {
+                $id = Auth::user()->id;
+                return User::find($id)->reservations()->latest()->paginate(5);
+            }
+        }
+       
     }
 
     /**
@@ -42,6 +52,15 @@ class ReservationController extends Controller
         }
     }
 
+
+    public function getAppointments(){
+          if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')){
+              if (Auth::check())
+            {
+                return Reservation::latest()->with('user')->paginate(10);
+            }
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -50,7 +69,40 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+                'petname' => 'required',
+                'petage' => 'required|numeric',
+                'petgender' => 'required',
+                'petbreed' => 'required'
+        ]);
+        $user = (int)Auth::user()->id;
+  
+        $reserve =  Reservation::create([
+            'user_id' => $user,
+            'petname' => $request['petname'],
+            'petage' => $request['petage'],
+            'petgender' => $request['petgender'],
+            'petbreed' => $request['petbreed'],
+            'service' => $request['service']
+        ]);
+
+/**//* $basic  = new Nexmo\Client\Credentials\Basic('9c9350e6', '8Eo5CgibNgBHEs7K');
+        $client = new Nexmo\Client($basic);
+$reserve = $client->message()->send([
+    'to' => '639472195796',
+    'from' => 'Pet Centre Animal Clinic',
+    'text' => 'New Reservation'
+]);*/
+    Nexmo::message()->send([
+        'to'   => '639472195796',
+    'from' => '639472195796',
+    'text' => 'Reservation added.'
+    ]); 
+        return $reserve;
+
+     
+
+
     }
 
     /**
@@ -61,7 +113,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+        
     }
 
     /**

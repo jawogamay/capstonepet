@@ -18,9 +18,6 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('type')->default('user');
-            $table->mediumText('bio')->nullable();
-            $table->string('photo')->default('profile.png');
             $table->rememberToken();
             $table->timestamps();
         });

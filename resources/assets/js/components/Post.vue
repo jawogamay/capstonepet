@@ -61,7 +61,7 @@
                             </select>
                             <br>
                             <input type="text" class="form-control" placeholder="Enter Passenger Name" name="passenger_name" v-model="form.passenger_name"><br>   -->   
-                            <input type="file" name="image" placeholder="Image" class="form-control"> <br>
+                        
                             <textarea class="form-control" placeholder="Whats on your mind ?" :class="{'is-invalid': form.errors.has('content') }" style="height:200px;" name="content" v-model="form.content">
                             </textarea>
                             <has-error :form="form" field="content"></has-error>
@@ -95,7 +95,7 @@
             if(this.$gate.isAdminOrAuthor()){
                 axios.get("api/posts").then(({data})=> (this.posts = data));
                 this.loadPost();
-                this.createdPassengers();
+                this.createdPost();
             }
         },
         methods:{
@@ -108,7 +108,7 @@
                 this.form.post('api/posts')
                 .then((response)=>{
                     this.$Progress.start();
-                    Fire.$emit('createdPassengers');
+                    Fire.$emit('createdPost');
                      $('#addNew').modal('hide')
                         toast({
                             type: 'success',
@@ -121,6 +121,12 @@
                 if(this.$gate.isAdminOrAuthor()){
                 axios.get("api/posts").then(({ data }) => (this.posts= data));
                 }
+            },
+            createdPost(){
+                this.loadPost();
+                Fire.$on('createdPost',()=> {
+                    this.loadPost();
+                })
             }
         }
     };

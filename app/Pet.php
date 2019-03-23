@@ -8,7 +8,7 @@ class Pet extends Model
 {
     //
     protected $fillable = [
-      'petname','user_id'
+      'petname','user_id','image'
     ];
 
     public function user(){

@@ -15,8 +15,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="/css/style.css" rel='stylesheet' type='text/css' />
-<script src="/js/jquery.min.js"></script>
-<!--start-smoth-scrolling-->
 <script type="text/javascript" src="/js/move-top.js"></script>
 <script type="text/javascript" src="/js/easing.js"></script>
 <script type="text/javascript" src="/js/app.js"></script>
@@ -56,6 +54,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>  
     <!--header-starts-->
+   <div class="visible-print text-center">
+    {!! QrCode::size(100)->generate('Juvelyn Bocal'); !!}
+    <p>Scan me to return to the original page.</p>
+    </div>
     <div class="header" id="home">
         <div class="container">
             <div class="header-top">

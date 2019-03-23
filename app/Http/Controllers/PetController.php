@@ -44,14 +44,28 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
+        /*if($request->hasFile('image')){
+            $imagename = $request->image->getClientOriginalName();
+            $request->image->storeAs('public',$imagename);
+        }*/
+        $explode = explode(',', $request['image']);
+        $decode = base64_decode($explode[1]);
+        if(str_contains($explode[0],'jpeg'))
+            $extension = 'jpg';
+        else
+            $extension = 'png';
+        $fileName = str_random().'.'.$extension;
+        $path = public_path().'/'.$fileName;
+        file_put_contents($path, $decode);
         $this->validate($request,[
             'petname' => 'required',
+            'image' => 'required'
         ]);
         $user = Auth::user()->id;
         return Pet::create([
            'user_id' => $user,
            'petname' => $request['petname'],
-           'image' => $request['image']
+           'image' => $fileName
         ]);
     }
 

@@ -6,14 +6,40 @@
  */
 
 require('./bootstrap');
-import 'vuetify/dist/vuetify.min.css'
+/*import 'vuetify/dist/vuetify.min.css'*/
 window.Vue = require('vue');
 import moment from 'moment';
 import { Form, HasError, AlertError } from 'vform';
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAQ-3qQsQhnBCwQASZhxsDNsPAtzRSieLs',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+    // OR: libraries: 'places,drawing'
+    // OR: libraries: 'places,drawing,visualization'
+    // (as you require)
+ 
+    //// If you want to set the version, you can do so:
+    // v: '3.26',
+  },
+ 
+  //// If you intend to programmatically custom event listener code
+  //// (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
+  //// instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
+  //// you might need to turn this on.
+  // autobindAllEvents: false,
+ 
+  //// If you want to manually install components, e.g.
+  //// import {GmapMarker} from 'vue2-google-maps/src/components/marker'
+  //// Vue.component('GmapMarker', GmapMarker)
+  //// then disable the following:
+  // installComponents: true,
+})
 
 import Gate from "./Gate";
-import Vuetify from "vuetify";
-Vue.use(Vuetify);
+/*import Vuetify from "vuetify";
+Vue.use(Vuetify);*/
 Vue.prototype.$gate = new Gate(window.user);
 
 
@@ -56,7 +82,10 @@ let routes = [
     {path:'/reservation',component: require('./components/Reservation.vue')},
     {path:'/home',component:require('./components/Home.vue')},
     {path:'/post',component:require('./components/Post.vue')},
-    {path:'/pets',component:require('./components/Pet.vue')}
+    {path:'/pets',component:require('./components/Pet.vue')},
+    {path:'/appointments',component:require('./components/Appointment.vue')},
+    {path:'/qrcode',component:require('./components/Qrcode.vue')},
+    {path:'/maps',component:require('./components/Maps.vue')}
   ]
 
 const router = new VueRouter({
